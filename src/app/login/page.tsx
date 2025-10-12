@@ -46,36 +46,44 @@ export default function LoginPage() {
     <div className="flex min-h-screen items-center justify-center bg-gray-50 px-4">
       <form
         onSubmit={handleSubmit}
-        className="w-full max-w-md rounded-lg bg-white p-8 shadow-md"
+        className="grid w-full max-w-md gap-4 rounded-lg bg-white p-8 shadow-md"
       >
-        <h1 className="mb-6 text-center text-2xl font-semibold text-gray-800">
+        <h1 className="text-center text-2xl font-semibold text-gray-800">
           Log in to your account
         </h1>
 
-        {error && <p className="mb-4 text-center text-red-600">{error}</p>}
+        {error && <p className="text-center text-red-600">{error}</p>}
 
-        <div className="mb-4">
-          <label className="block text-sm font-medium text-gray-700">
+        <div className="space-y-2">
+          <label
+            className="block text-sm font-medium text-gray-700"
+            htmlFor="email"
+          >
             Email
           </label>
           <input
+            id="email"
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className="mt-1 w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+            className="w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus-visible:border-blue-500 focus-visible:ring-blue-500 focus-visible:outline-none"
             required
           />
         </div>
 
-        <div className="mb-6">
-          <label className="block text-sm font-medium text-gray-700">
+        <div className="space-y-2">
+          <label
+            className="block text-sm font-medium text-gray-700"
+            htmlFor="password"
+          >
             Password
           </label>
           <input
+            id="password"
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            className="mt-1 w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+            className="w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus-visible:border-blue-500 focus-visible:ring-blue-500 focus-visible:outline-none"
             required
           />
         </div>
@@ -83,7 +91,7 @@ export default function LoginPage() {
         <button
           type="submit"
           disabled={loading}
-          className="w-full rounded-md bg-blue-600 px-4 py-2 text-white transition hover:bg-blue-700 disabled:opacity-50"
+          className="w-full rounded-md bg-blue-600 px-4 py-2 text-white transition hover:bg-blue-700 focus-visible:outline-none disabled:opacity-50"
         >
           {loading ? "Signing in..." : "Sign In"}
         </button>

@@ -18,7 +18,7 @@ export default function Navbar() {
   if (loading) return null; // avoid flicker on first load
 
   return (
-    <nav className="mx-auto flex max-w-7xl items-center justify-between bg-white px-8 py-4 shadow-sm">
+    <nav className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-4 bg-white px-8 py-4 shadow-sm">
       <Link
         href="/"
         className="text-2xl font-semibold text-blue-600 focus-visible:outline-blue-600"
@@ -33,7 +33,7 @@ export default function Navbar() {
             <span className="text-gray-700">Welcome, {user.name}</span>
             <button
               onClick={handleLogout}
-              className="rounded-lg border border-red-600 px-4 py-2 text-red-600 transition hover:bg-red-600 hover:text-white focus-visible:bg-red-600 focus-visible:text-white focus-visible:outline-none"
+              className="cursor-pointer rounded-lg border border-red-600 px-4 py-2 text-red-600 transition hover:bg-red-600 hover:text-white focus-visible:bg-red-600 focus-visible:text-white focus-visible:outline-none"
             >
               Logout
             </button>
