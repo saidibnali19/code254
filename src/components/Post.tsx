@@ -1,12 +1,9 @@
 "use client";
 
-import { IPost } from "@/models/Post";
+import { PostData } from "@/types/types";
 
 import Link from "next/link";
-type PostProps = Pick<
-  IPost,
-  "slug" | "content" | "createdAt" | "tags" | "title" | "author"
->;
+
 export default function Post({
   title,
   slug,
@@ -14,9 +11,9 @@ export default function Post({
   author,
   createdAt,
   tags,
-}: PostProps) {
+}: PostData) {
   return (
-    <article className="mx-auto grid max-w-7xl grid-rows-[auto_auto_1fr_auto] gap-4 rounded-2xl bg-white p-6 shadow-md transition-shadow duration-300 hover:shadow-lg">
+    <article className="mx-auto grid max-w-7xl gap-4 rounded-2xl bg-white p-6 shadow-md transition-shadow duration-300 hover:shadow-lg">
       <div className="flex flex-wrap gap-2">
         {tags &&
           tags.map((tag, index) => (
@@ -36,7 +33,7 @@ export default function Post({
         <div className="grid gap-2">
           <p className="text-sm font-semibold text-gray-900">{author}</p>
           <p className="text-sm text-gray-500">
-            Published on {createdAt.toLocaleDateString()}
+            Published on {new Date(createdAt).toLocaleDateString()}
           </p>
         </div>
         <Link
