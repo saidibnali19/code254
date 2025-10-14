@@ -50,9 +50,9 @@ export default function LatestArticles() {
         </p>
       </div>
 
-      <ul className="grid grid-cols-[repeat(auto-fit,minmax(15rem,1fr))] gap-8">
+      <ul className="grid grid-cols-[repeat(auto-fit,minmax(15rem,1fr))] grid-rows-[auto_auto_1fr_auto] gap-8">
         {posts.map((post) => (
-          <li key={post._id}>
+          <li key={post._id} className="row-span-4 grid grid-rows-subgrid">
             <Post
               title={post.title}
               content={post.content}
@@ -61,6 +61,7 @@ export default function LatestArticles() {
               createdAt={post.createdAt}
               tags={post.tags}
               slug={post.slug}
+              variant="gray"
             />
           </li>
         ))}

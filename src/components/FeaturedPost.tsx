@@ -34,7 +34,7 @@ export default async function FeaturedPost() {
         <Post
           title={post.title}
           content={post.content}
-          author={post.author.name}
+          author={post.author}
           createdAt={new Date(post.createdAt)}
           isFeatured={post.isFeatured}
           slug={post.slug}
