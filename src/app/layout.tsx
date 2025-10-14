@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import { AuthProvider } from "@/context/AuthContext";
+import { Toaster } from "react-hot-toast";
 
 export const metadata: Metadata = {
   title: "Code254",
@@ -19,7 +20,10 @@ export default function RootLayout({
       <AuthProvider>
         <body>
           <Navbar />
-          <main>{children}</main>
+          <main>
+            <Toaster position="top-right" toastOptions={{ duration: 3000 }} />
+            {children}
+          </main>
         </body>
       </AuthProvider>
     </html>

@@ -30,19 +30,13 @@ export default async function FeaturedPost() {
         <h1 className="text-sm font-semibold tracking-wide text-blue-600 uppercase">
           Featured Post
         </h1>
-        {/* <Post
-          title="The Rise of AI in Creative Writing"
-          content="Exploring how artificial intelligence is transforming storytelling and content creation."
-          author="Siad Ali"
-          createdAt={new Date("October 11, 2025")}
-          slug="the-rise-of-ai-in-creative-writing"
-          tags={["AI", "Content creation"]}
-        /> */}
+
         <Post
           title={post.title}
           content={post.content}
-          author={post.author}
+          author={post.author.name}
           createdAt={new Date(post.createdAt)}
+          isFeatured={post.isFeatured}
           slug={post.slug}
           tags={post.tags}
         />

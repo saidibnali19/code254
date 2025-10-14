@@ -2,18 +2,13 @@
 
 import Link from "next/link";
 
-import { useEffect, useState } from "react";
-
-import { User } from "@/types/types";
 import { useAuth } from "@/context/AuthContext";
+import LoginButton from "./auth/LoginButton";
+import SignUpButton from "./auth/SignUpButton";
+import LogOutButton from "./auth/LogOutButton";
 
 export default function Navbar() {
   const { user, setUser, loading } = useAuth();
-  const handleLogout = async () => {
-    await fetch("/api/auth/logout", { method: "POST" });
-    localStorage.removeItem("accesstoken");
-    setUser(null);
-  };
 
   if (loading) return null; // avoid flicker on first load
 
@@ -26,32 +21,22 @@ export default function Navbar() {
         Code254
       </Link>
 
-      {/* Navigation actions */}
+      <ul>
+        <li>
+          <Link href={"/posts/new"}>Create New Post</Link>
+        </li>
+      </ul>
+
       <div className="flex items-center gap-4">
         {user ? (
           <>
             <span className="text-gray-700">Welcome, {user.name}</span>
-            <button
-              onClick={handleLogout}
-              className="cursor-pointer rounded-lg border border-red-600 px-4 py-2 text-red-600 transition hover:bg-red-600 hover:text-white focus-visible:bg-red-600 focus-visible:text-white focus-visible:outline-none"
-            >
-              Logout
-            </button>
+            <LogOutButton setUser={setUser} />
           </>
         ) : (
           <>
-            <Link
-              href="/login"
-              className="rounded-lg border border-blue-600 px-4 py-2 text-blue-600 transition hover:bg-blue-600 hover:text-white focus-visible:bg-blue-600 focus-visible:text-white focus-visible:outline-none"
-            >
-              Log In
-            </Link>
-            <Link
-              href="/signup"
-              className="rounded-lg bg-blue-600 px-4 py-2 text-white transition hover:bg-blue-700 focus-visible:bg-blue-700 focus-visible:outline-none"
-            >
-              Sign Up
-            </Link>
+            <LoginButton />
+            <SignUpButton />
           </>
         )}
       </div>

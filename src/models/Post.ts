@@ -15,13 +15,15 @@ export interface IPost extends Document {
 
 const PostSchema = new Schema<IPost>(
   {
-    title: { type: String, required: true, trim: true },
+    title: { type: String, required: true },
     slug: { type: String, required: true, unique: true },
     content: { type: String, required: true },
-    author: { type: String, required: true },
     tags: [{ type: String }],
     isFeatured: { type: Boolean, default: false },
-    published: { type: Boolean, default: false },
+    author: {
+      id: { type: String, required: true },
+      name: { type: String, required: true },
+    },
   },
   { timestamps: true },
 );
