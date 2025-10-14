@@ -27,11 +27,7 @@ export async function POST(req: Request) {
       );
     }
 
-    // Hash password
-    const salt = await bcrypt.genSalt(10);
-    const hashed = await bcrypt.hash(password, salt);
-
-    const newUser = await User.create({ name, email, password: hashed });
+    const newUser = await User.create({ name, email, password });
 
     // Create token
     const accesstoken = jwt.sign(

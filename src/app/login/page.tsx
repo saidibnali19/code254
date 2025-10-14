@@ -1,11 +1,15 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useAuth } from "@/context/AuthContext";
 
 export default function LoginPage() {
   const { setUser } = useAuth();
+
+  const searchParams = useSearchParams();
+
+  const redirect = searchParams.get("redirect") || "/";
 
   const router = useRouter();
   const [email, setEmail] = useState("");
@@ -34,7 +38,7 @@ export default function LoginPage() {
       // Store tokens (if returned in response body)
       localStorage.setItem("accesstoken", data.accessToken);
       setUser(data.user);
-      router.push("/"); // redirect to homepage
+      router.push(redirect); // 👈 go back to intended page
     } catch (err: any) {
       setError(err.message);
     } finally {

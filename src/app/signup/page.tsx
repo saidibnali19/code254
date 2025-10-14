@@ -1,12 +1,14 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useAuth } from "@/context/AuthContext";
 
 export default function SignupPage() {
   const router = useRouter();
-  const { setUser } = useAuth(); // ✅ access setter
+  const searchParams = useSearchParams();
+  const redirect = searchParams.get("redirect") || "/";
+  const { setUser } = useAuth();
 
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -37,7 +39,8 @@ export default function SignupPage() {
       // ✅ Immediately set user in context
       setUser(data.user);
 
-      router.push("/"); // redirect home
+      // ✅ Redirect back to intended route after signup
+      router.push(redirect);
     } catch (err: any) {
       setError(err.message);
     } finally {
