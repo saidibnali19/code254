@@ -12,6 +12,8 @@ export default function Post({
   createdAt,
   tags,
 }: PostData) {
+  const firsrtFewWords = content.split(" ").slice(0, 12).join(" ");
+
   return (
     <article className="mx-auto grid max-w-7xl gap-4 rounded-2xl bg-white p-6 shadow-md transition-shadow duration-300 hover:shadow-lg">
       <div className="flex flex-wrap gap-2">
@@ -28,10 +30,13 @@ export default function Post({
       <h2 className="text-2xl leading-tight font-bold text-gray-900">
         {title}
       </h2>
-      <p className="leading-relaxed text-gray-600">{content}</p>
+      <p className="leading-relaxed text-gray-600">
+        {firsrtFewWords}
+        {content.split(" ").length > 6 ? "..." : ""}
+      </p>
       <div className="grid grid-cols-2 gap-x-4 gap-y-2 border-t border-gray-200 pt-4">
         <div className="grid gap-2">
-          <p className="text-sm font-semibold text-gray-900">{author}</p>
+          <p className="text-sm font-semibold text-gray-900">{author.name}</p>
           <p className="text-sm text-gray-500">
             Published on {new Date(createdAt).toLocaleDateString()}
           </p>

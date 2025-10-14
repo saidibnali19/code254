@@ -4,10 +4,19 @@ import Post from "@/models/Post";
 import User from "@/models/User";
 import { NextResponse } from "next/server";
 
-export async function GET() {
+export async function GET(req: Request) {
   try {
     await dbConnect();
-    const posts = await Post.find().sort({ createdAt: -1 });
+
+    // Allow limit param e.g. /api/posts?limit=3
+    const { searchParams } = new URL(req.url);
+    const limitParam = searchParams.get("limit");
+    const limit = limitParam ? parseInt(limitParam, 10) : undefined;
+
+    const posts = await Post.find()
+      .sort({ createdAt: -1 })
+      .limit(limit ?? 0)
+      .lean();
     return NextResponse.json(posts);
   } catch (error) {
     return NextResponse.json({

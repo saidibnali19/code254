@@ -10,7 +10,10 @@ export interface PostData {
   title: string;
   slug: string;
   content: string;
-  author: string;
+  author: {
+    id: string;
+    name: string;
+  };
   tags: string[];
   isFeatured: boolean;
   createdAt: string | Date;
