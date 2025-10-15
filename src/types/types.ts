@@ -18,4 +18,5 @@ export interface PostData {
   isFeatured: boolean;
   createdAt: string | Date;
   updatedAt?: string | Date;
+  published: boolean;
 }

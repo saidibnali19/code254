@@ -13,7 +13,7 @@ export async function GET(req: Request) {
     const limitParam = searchParams.get("limit");
     const limit = limitParam ? parseInt(limitParam, 10) : undefined;
 
-    const posts = await Post.find()
+    const posts = await Post.find({ published: true })
       .sort({ createdAt: -1 })
       .limit(limit ?? 0)
       .lean();
@@ -59,7 +59,7 @@ export async function POST(req: Request) {
 
     // ✅ Parse request body
     const body = await req.json();
-    const { title, slug, content, tags, isFeatured } = body;
+    const { title, slug, content, tags, isFeatured, published = true } = body;
 
     if (!title || !slug || !content) {
       return NextResponse.json(
@@ -68,13 +68,13 @@ export async function POST(req: Request) {
       );
     }
 
-    // ✅ Create post with both ID and name
     const newPost = await Post.create({
       title,
       slug,
       content,
       tags,
       isFeatured: Boolean(isFeatured),
+      published: Boolean(published),
       author: {
         id: decoded.userId,
         name: user.name,

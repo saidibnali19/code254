@@ -5,7 +5,10 @@ export interface IPost extends Document {
   title: string;
   slug: string;
   content: string;
-  author: string;
+  author: {
+    id: string;
+    name: string;
+  };
   tags: string[];
   isFeatured: boolean;
   published: boolean;
@@ -20,6 +23,7 @@ const PostSchema = new Schema<IPost>(
     content: { type: String, required: true },
     tags: [{ type: String }],
     isFeatured: { type: Boolean, default: false },
+    published: { type: Boolean, default: true },
     author: {
       id: { type: String, required: true },
       name: { type: String, required: true },

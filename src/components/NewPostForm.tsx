@@ -12,6 +12,7 @@ export default function NewPostForm() {
   const [tags, setTags] = useState("");
   const [isFeatured, setIsFeatured] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [published, setPublished] = useState(true);
 
   // 🔹 Auto-generate slug from title
   useEffect(() => {
@@ -23,7 +24,7 @@ export default function NewPostForm() {
     setSlug(generated);
   }, [title]);
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent, publishStatus = true) => {
     e.preventDefault();
     setLoading(true);
 
@@ -33,6 +34,7 @@ export default function NewPostForm() {
       content,
       tags: tags.split(",").map((tag) => tag.trim()),
       isFeatured,
+      published: publishStatus,
     };
 
     try {
@@ -46,7 +48,12 @@ export default function NewPostForm() {
       const data = await res.json();
 
       if (res.ok) {
-        toast.success("Post created successfully!");
+        toast.success(
+          publishStatus
+            ? "✅ Post published successfully!"
+            : "💾 Draft saved successfully!",
+        );
+
         setTitle("");
         setSlug("");
         setContent("");
@@ -68,7 +75,7 @@ export default function NewPostForm() {
 
   return (
     <form
-      onSubmit={handleSubmit}
+      onSubmit={(e) => handleSubmit(e, true)}
       className="mx-auto max-w-3xl space-y-4 rounded-2xl bg-white p-8 shadow-md"
     >
       <h1 className="text-2xl font-bold text-gray-900">Create New Post</h1>
@@ -136,14 +143,25 @@ export default function NewPostForm() {
         </label>
       </div>
 
-      {/* Submit */}
-      <button
-        type="submit"
-        disabled={loading}
-        className="w-full rounded-lg bg-blue-600 px-4 py-2 font-medium text-white transition hover:bg-blue-700 focus-visible:bg-blue-700 focus-visible:outline-none disabled:opacity-50"
-      >
-        {loading ? "Creating..." : "Create Post"}
-      </button>
+      {/* Buttons */}
+      <div className="flex gap-3">
+        <button
+          type="submit"
+          disabled={loading}
+          className="flex-1 rounded-lg bg-blue-600 px-4 py-2 font-medium text-white transition hover:bg-blue-700 disabled:opacity-50"
+        >
+          {loading ? "Creating..." : "Publish Post"}
+        </button>
+
+        <button
+          type="button"
+          onClick={(e) => handleSubmit(e as any, false)}
+          disabled={loading}
+          className="flex-1 rounded-lg bg-gray-200 px-4 py-2 font-medium text-gray-700 transition hover:bg-gray-300 disabled:opacity-50"
+        >
+          {loading ? "Saving..." : "Save as Draft"}
+        </button>
+      </div>
     </form>
   );
 }
