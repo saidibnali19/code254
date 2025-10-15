@@ -16,9 +16,9 @@ export default function Navbar() {
     <nav className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-4 bg-white px-8 py-4 shadow-sm">
       <Link
         href="/"
-        className="text-2xl font-semibold text-blue-600 focus-visible:outline-blue-600"
+        className="text-2xl font-bold text-gray-900 focus-visible:outline-blue-600"
       >
-        Code254
+        Code<span className="text-blue-600">254</span>
       </Link>
 
       <ul>

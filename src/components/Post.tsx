@@ -19,6 +19,13 @@ export default function Post({
 }: PostProps) {
   const firsrtFewWords = content.split(" ").slice(0, 12).join(" ");
 
+  const getInitials = (name: string) => {
+    return name
+      .split(" ") // Split the name into an array of words
+      .map((word) => word.charAt(0).toUpperCase()) // Get the first letter and convert to uppercase
+      .join(""); // Join the letters into a single string
+  };
+
   // Determine the background color based on the variant prop
   const bgColor = variant === "gray" ? "bg-gray-50" : "bg-white";
 
@@ -46,11 +53,18 @@ export default function Post({
       </p>
       <div className="@container grid border-t border-gray-200 pt-4">
         <div className="grid gap-x-4 gap-y-2 @xs:grid-cols-2">
-          <div className="grid gap-2">
-            <p className="text-sm font-semibold text-gray-900">{author.name}</p>
-            <p className="text-sm text-gray-500">
-              Published on {new Date(createdAt).toLocaleDateString()}
-            </p>
+          <div className="flex gap-2">
+            <div className="flex h-14 w-14 items-center justify-center rounded-full bg-gradient-to-br from-blue-500 to-blue-600 text-lg font-semibold text-white">
+              {getInitials(author.name)}
+            </div>
+            <div className="grid gap-2">
+              <p className="text-sm font-semibold text-gray-900">
+                {author.name}
+              </p>
+              <p className="text-sm text-gray-500">
+                Published on {new Date(createdAt).toLocaleDateString()}
+              </p>
+            </div>
           </div>
           <Link
             href={`posts/${slug}`}

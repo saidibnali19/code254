@@ -7,7 +7,8 @@ import { Toaster } from "react-hot-toast";
 
 export const metadata: Metadata = {
   title: "Code254",
-  description: "Code254 is a blog on Kenyan tech",
+  description:
+    "Code254 is a developer community + blog platform focused on Kenyan and African devs, featuring articles, user contributions, and discussions.",
 };
 
 export default function RootLayout({
