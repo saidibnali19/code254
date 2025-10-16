@@ -1,3 +1,4 @@
+import Pagination from "@/components/Pagination";
 import Post from "@/components/Post";
 import SearchForm from "@/components/SearchForm";
 import { PostData } from "@/types/types";
@@ -5,13 +6,14 @@ import { PostData } from "@/types/types";
 export default async function AllPostsPage({
   searchParams,
 }: {
-  searchParams: { search?: string };
+  searchParams: { search?: string; page?: string };
 }) {
   const query = searchParams?.search || "";
+  const page = searchParams?.page || "1";
 
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_BASE_URL}/api/posts${
-      query ? `?search=${encodeURIComponent(query)}` : ""
+    `${process.env.NEXT_PUBLIC_BASE_URL}/api/posts?limit=6&page=${page}${
+      query ? `&search=${encodeURIComponent(query)}` : ""
     }`,
     {
       cache: "no-store",
@@ -30,9 +32,9 @@ export default async function AllPostsPage({
     );
   }
 
-  const posts = await res.json();
+  const { posts, totalPages, currentPage } = await res.json();
 
-  if (posts.length === 0) {
+  if (!posts || posts.length === 0) {
     return (
       <article className="mx-auto max-w-7xl space-y-4 px-4 py-10 text-center text-gray-600 sm:px-6 sm:py-12 lg:px-8 lg:py-16">
         <h1 className="text-sm font-semibold tracking-wide text-blue-600 uppercase">
@@ -73,6 +75,8 @@ export default async function AllPostsPage({
           </li>
         ))}
       </ul>
+
+      <Pagination totalPages={totalPages} currentPage={currentPage} />
     </article>
   );
 }

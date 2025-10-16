@@ -12,7 +12,10 @@ export async function GET(req: Request) {
     const { searchParams } = new URL(req.url);
     const limitParam = searchParams.get("limit");
     const limit = limitParam ? parseInt(limitParam, 10) : undefined;
+    const pageParam = searchParams.get("page");
     const search = searchParams.get("search");
+    const page = pageParam ? parseInt(pageParam, 10) : 1;
+    const skip = (page - 1) * limit;
 
     // ✅ Search filter: if search exists, match by title or tags
     const filter = search
@@ -25,12 +28,22 @@ export async function GET(req: Request) {
         }
       : { published: true };
 
+    // ✅ Count total posts for pagination
+    const totalPosts = await Post.countDocuments(filter);
+    const totalPages = Math.ceil(totalPosts / limit);
+
     const posts = await Post.find(filter)
       .sort({ createdAt: -1 })
-      .limit(limit ?? 0)
+      .skip(skip)
+      .limit(limit)
       .populate("author", "name email")
       .lean();
-    return NextResponse.json(posts);
+    return NextResponse.json({
+      ok: true,
+      posts,
+      totalPages,
+      currentPage: page,
+    });
   } catch (error) {
     return NextResponse.json({
       ok: false,

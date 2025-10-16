@@ -49,7 +49,7 @@ export default async function PostPage({ params }: PostPageProps) {
             Home
           </Link>
           <span>/</span>
-          <Link href="/blog" className="transition-colors hover:text-blue-600">
+          <Link href="/posts" className="transition-colors hover:text-blue-600">
             Blog
           </Link>
           <span>/</span>
