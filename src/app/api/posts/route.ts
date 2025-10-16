@@ -12,8 +12,20 @@ export async function GET(req: Request) {
     const { searchParams } = new URL(req.url);
     const limitParam = searchParams.get("limit");
     const limit = limitParam ? parseInt(limitParam, 10) : undefined;
+    const search = searchParams.get("search");
 
-    const posts = await Post.find({ published: true })
+    // ✅ Search filter: if search exists, match by title or tags
+    const filter = search
+      ? {
+          published: true,
+          $or: [
+            { title: { $regex: search, $options: "i" } },
+            { tags: { $regex: search, $options: "i" } },
+          ],
+        }
+      : { published: true };
+
+    const posts = await Post.find(filter)
       .sort({ createdAt: -1 })
       .limit(limit ?? 0)
       .populate("author", "name email")

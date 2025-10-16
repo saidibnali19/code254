@@ -21,9 +21,19 @@ export default function Navbar() {
         Code<span className="text-blue-600">254</span>
       </Link>
 
-      <ul>
+      <ul className="flex gap-4">
         <li>
-          <Link href={"/posts/new"}>Create New Post</Link>
+          <Link href="/posts" className="text-gray-700 hover:text-blue-600">
+            All Posts
+          </Link>
+        </li>
+        <li>
+          <Link
+            href={"/posts/new"}
+            className="text-gray-700 hover:text-blue-600"
+          >
+            Create New Post
+          </Link>
         </li>
       </ul>
 
