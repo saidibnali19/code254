@@ -39,6 +39,7 @@ export default async function FeaturedPost() {
           isFeatured={post.isFeatured}
           slug={post.slug}
           tags={post.tags}
+          published={post.published}
         />
       </article>
     </>

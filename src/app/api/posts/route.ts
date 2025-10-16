@@ -16,6 +16,7 @@ export async function GET(req: Request) {
     const posts = await Post.find({ published: true })
       .sort({ createdAt: -1 })
       .limit(limit ?? 0)
+      .populate("author", "name email")
       .lean();
     return NextResponse.json(posts);
   } catch (error) {
@@ -75,13 +76,12 @@ export async function POST(req: Request) {
       tags,
       isFeatured: Boolean(isFeatured),
       published: Boolean(published),
-      author: {
-        id: decoded.userId,
-        name: user.name,
-      },
+      author: user._id,
     });
 
-    return NextResponse.json({ ok: true, post: newPost });
+    const populatedPost = await newPost.populate("author", "name email");
+
+    return NextResponse.json({ ok: true, post: populatedPost });
   } catch (err: any) {
     console.error("Error creating post:", err);
     return NextResponse.json(

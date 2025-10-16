@@ -5,10 +5,7 @@ export interface IPost extends Document {
   title: string;
   slug: string;
   content: string;
-  author: {
-    id: string;
-    name: string;
-  };
+  author: mongoose.Schema.Types.ObjectId;
   tags: string[];
   isFeatured: boolean;
   published: boolean;
@@ -25,8 +22,9 @@ const PostSchema = new Schema<IPost>(
     isFeatured: { type: Boolean, default: false },
     published: { type: Boolean, default: true },
     author: {
-      id: { type: String, required: true },
-      name: { type: String, required: true },
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+      required: true,
     },
   },
   { timestamps: true },

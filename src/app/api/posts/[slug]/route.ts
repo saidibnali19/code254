@@ -12,7 +12,9 @@ export async function GET(
     const { slug } = params;
 
     // ✅ Find post by slug
-    const post = await Post.findOne({ slug }).lean();
+    const post = await Post.findOne({ slug })
+      .populate("author", "name email")
+      .lean();
 
     if (!post) {
       return NextResponse.json(
