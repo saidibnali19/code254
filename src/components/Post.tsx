@@ -2,10 +2,11 @@
 
 import { PostData } from "@/types/types";
 
-import Link from "next/link";
+import ReadMoreButton from "./ReadMoreButton";
 
 interface PostProps extends PostData {
-  variant?: "white" | "gray"; // Add a variant prop to manage styles
+  variant?: "white" | "gray";
+  buttonVariant?: "no-icon" | "with-icon";
 }
 
 export default function Post({
@@ -16,6 +17,7 @@ export default function Post({
   createdAt,
   tags,
   variant = "white",
+  buttonVariant = "no-icon",
 }: PostProps) {
   const firsrtFewWords = content.split(" ").slice(0, 12).join(" ");
 
@@ -73,25 +75,8 @@ export default function Post({
               </p>
             </div>
           </div>
-          <Link
-            href={`posts/${slug}`}
-            className="inline-flex items-center justify-self-end rounded-lg bg-blue-600 px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-blue-700 focus-visible:bg-blue-700 @max-xs:justify-self-start"
-          >
-            Read more <span className="sr-only">about {title}</span>
-            <svg
-              className="ml-2 h-4 w-4"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M9 5l7 7-7 7"
-              ></path>
-            </svg>
-          </Link>
+
+          <ReadMoreButton slug={slug} title={title} variant={buttonVariant} />
         </div>
       </div>
     </article>

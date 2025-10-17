@@ -17,3 +17,13 @@ export interface PostData {
   updatedAt?: string | Date;
   published: boolean;
 }
+
+export interface LoginButtonProps {
+  href?: string;
+  variant?: "button" | "link";
+}
+
+export interface SignupButtonProps {
+  href?: string;
+  variant?: "button" | "link";
+}
