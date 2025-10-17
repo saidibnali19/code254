@@ -57,7 +57,7 @@ export default function Pagination({
       <button
         onClick={() => goToPage(1)}
         disabled={currentPage === 1}
-        className="rounded-lg border border-gray-300 p-2 transition hover:bg-gray-100 disabled:opacity-50"
+        className="rounded-lg border border-gray-300 p-2 transition hover:bg-gray-100 focus-visible:bg-gray-100 focus-visible:outline-none disabled:opacity-50"
         aria-label="First page"
       >
         <ChevronsLeft className="h-4 w-4" />
@@ -67,7 +67,7 @@ export default function Pagination({
       <button
         onClick={() => goToPage(currentPage - 1)}
         disabled={currentPage === 1}
-        className="rounded-lg border border-gray-300 p-2 transition hover:bg-gray-100 disabled:opacity-50"
+        className="rounded-lg border border-gray-300 p-2 transition hover:bg-gray-100 focus-visible:bg-gray-100 focus-visible:outline-none disabled:opacity-50"
         aria-label="Previous page"
       >
         <ChevronLeft className="h-4 w-4" />
@@ -79,10 +79,10 @@ export default function Pagination({
           <button
             key={index}
             onClick={() => goToPage(page)}
-            className={`rounded-lg border border-gray-300 px-3 py-1 text-sm font-medium transition ${
+            className={`rounded-lg border border-gray-300 px-3 py-1 text-sm font-medium transition focus-visible:outline-none ${
               page === currentPage
                 ? "border-blue-600 bg-blue-600 text-white"
-                : "hover:bg-gray-100"
+                : "hover:bg-gray-100 focus-visible:bg-gray-100"
             }`}
           >
             {page}
@@ -98,7 +98,7 @@ export default function Pagination({
       <button
         onClick={() => goToPage(currentPage + 1)}
         disabled={currentPage === totalPages}
-        className="rounded-lg border border-gray-300 p-2 transition hover:bg-gray-100 disabled:opacity-50"
+        className="rounded-lg border border-gray-300 p-2 transition hover:bg-gray-100 focus-visible:bg-gray-100 focus-visible:outline-none disabled:opacity-50"
         aria-label="Next page"
       >
         <ChevronRight className="h-4 w-4" />
@@ -108,7 +108,7 @@ export default function Pagination({
       <button
         onClick={() => goToPage(totalPages)}
         disabled={currentPage === totalPages}
-        className="rounded-lg border border-gray-300 p-2 transition hover:bg-gray-100 disabled:opacity-50"
+        className="rounded-lg border border-gray-300 p-2 transition hover:bg-gray-100 focus-visible:bg-gray-100 focus-visible:outline-none disabled:opacity-50"
         aria-label="Last page"
       >
         <ChevronsRight className="h-4 w-4" />

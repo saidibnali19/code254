@@ -14,7 +14,7 @@ export default function LatestArticles() {
       try {
         const res = await fetch("/api/posts?limit=3");
         const data = await res.json();
-        setPosts(data);
+        setPosts(data.posts);
       } catch (error) {
         console.error("Failed to fetch latest articles:", error);
       } finally {
@@ -62,6 +62,7 @@ export default function LatestArticles() {
               tags={post.tags}
               slug={post.slug}
               variant="gray"
+              buttonVariant="with-icon"
               published={post.published}
             />
           </li>
