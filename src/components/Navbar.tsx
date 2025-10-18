@@ -55,6 +55,7 @@ export default function Navbar() {
         {user ? (
           <>
             <span className="text-gray-700">Welcome, {user.name}</span>
+            <Link href="/dashboard">Dashboard</Link>
             <LogOutButton setUser={setUser} />
           </>
         ) : (
