@@ -88,7 +88,34 @@ export default function PostsTable({ posts }: PostsTableProps) {
                   >
                     Edit
                   </Link>
-                  <button className="rounded-lg bg-red-50 px-3 py-2 text-xs font-medium text-red-600 transition-colors hover:bg-red-100">
+                  <button
+                    onClick={async () => {
+                      if (
+                        !confirm(
+                          `Are you sure you want to delete "${post.title}"?`,
+                        )
+                      )
+                        return;
+
+                      try {
+                        const res = await fetch(`/api/posts/${post.slug}`, {
+                          method: "DELETE",
+                        });
+
+                        const data = await res.json();
+                        if (data.ok) {
+                          alert("Post deleted successfully!");
+                          window.location.reload(); // refresh page to update list
+                        } else {
+                          alert(`Error: ${data.error}`);
+                        }
+                      } catch (err) {
+                        console.error(err);
+                        alert("Failed to delete post.");
+                      }
+                    }}
+                    className="rounded-lg bg-red-50 px-3 py-2 text-xs font-medium text-red-600 transition-colors hover:bg-red-100"
+                  >
                     Delete
                   </button>
                 </div>

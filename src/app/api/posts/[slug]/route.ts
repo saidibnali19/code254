@@ -85,3 +85,33 @@ export async function PUT(
     );
   }
 }
+
+export async function DELETE(
+  req: NextRequest,
+  { params }: { params: { slug: string } },
+) {
+  try {
+    await dbConnect();
+    const { slug } = params;
+
+    const deletedPost = await Post.findOneAndDelete({ slug });
+
+    if (!deletedPost) {
+      return NextResponse.json(
+        { ok: false, error: "Post not found" },
+        { status: 404 },
+      );
+    }
+
+    return NextResponse.json({
+      ok: true,
+      message: "Post deleted successfully",
+    });
+  } catch (error: any) {
+    console.error("Error deleting post:", error);
+    return NextResponse.json(
+      { ok: false, error: "Server error" },
+      { status: 500 },
+    );
+  }
+}
