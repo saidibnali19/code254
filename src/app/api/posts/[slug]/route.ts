@@ -52,8 +52,8 @@ export async function PUT(
       );
     }
 
-    const updatedPost = await Post.findByIdAndUpdate(
-      slug,
+    const updatedPost = await Post.findOneAndUpdate(
+      { slug },
       {
         title,
         content,
