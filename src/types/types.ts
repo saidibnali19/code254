@@ -27,3 +27,15 @@ export interface SignupButtonProps {
   href?: string;
   variant?: "button" | "link";
 }
+
+export interface CommentData {
+  _id?: string;
+  post: string;
+  author: {
+    id: string;
+    name: string;
+  };
+  content: string;
+  createdAt: string | Date;
+  updatedAt?: string | Date;
+}

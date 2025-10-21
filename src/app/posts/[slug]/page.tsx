@@ -1,6 +1,8 @@
 import { notFound } from "next/navigation";
 import { format } from "date-fns";
 import Link from "next/link";
+import CommentsSection from "../components/CommentsSection";
+import { getInitials } from "@/utils/getInitials";
 
 interface PostPageProps {
   params: { slug: string };
@@ -28,14 +30,8 @@ async function getPost(slug: string) {
 }
 
 export default async function PostPage({ params }: PostPageProps) {
+  const slug = params.slug;
   const post = await getPost(params.slug);
-
-  const getInitials = (name: string) => {
-    return name
-      .split(" ") // Split the name into an array of words
-      .map((word) => word.charAt(0).toUpperCase()) // Get the first letter and convert to uppercase
-      .join(""); // Join the letters into a single string
-  };
 
   if (!post) {
     notFound();
@@ -103,6 +99,7 @@ export default async function PostPage({ params }: PostPageProps) {
             dangerouslySetInnerHTML={{ __html: post.content }}
           />
         </article>
+        <CommentsSection slug={slug} />
       </div>
     </>
   );
