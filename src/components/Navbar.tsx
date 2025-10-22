@@ -6,6 +6,7 @@ import { useAuth } from "@/context/AuthContext";
 import LoginButton from "./auth/LoginButton";
 import SignUpButton from "./auth/SignUpButton";
 import LogOutButton from "./auth/LogOutButton";
+import UserAvatar from "./UserAvatar";
 
 export default function Navbar() {
   const { user, setUser, loading } = useAuth();
@@ -49,13 +50,32 @@ export default function Navbar() {
             Create New Post
           </Link>
         </li>
+        {user ? (
+          <li>
+            <Link
+              href="/dashboard"
+              className={`${linkBase} ${
+                pathname === "/dashboard" ? activeLink : inactiveLink
+              }`}
+            >
+              Dashboard
+            </Link>
+          </li>
+        ) : null}
       </ul>
 
       <div className="flex items-center gap-4">
         {user ? (
           <>
             <span className="text-gray-700">Welcome, {user.name}</span>
-            <Link href="/dashboard">Dashboard</Link>
+
+            <Link
+              href="/profile"
+              className="outline-offset-2 transition hover:scale-110 focus-visible:scale-110 focus-visible:outline-none"
+            >
+              <UserAvatar authorName={user.name} />
+            </Link>
+
             <LogOutButton setUser={setUser} />
           </>
         ) : (

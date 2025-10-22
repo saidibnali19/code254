@@ -2,6 +2,8 @@ export interface User {
   id: string;
   name: string;
   email: string;
+  bio?: string;
+  avatar?: string;
 }
 
 // This type is for use in api routes and frontend UI

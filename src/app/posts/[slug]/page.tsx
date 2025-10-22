@@ -2,7 +2,7 @@ import { notFound } from "next/navigation";
 import { format } from "date-fns";
 import Link from "next/link";
 import CommentsSection from "../components/CommentsSection";
-import { getInitials } from "@/utils/getInitials";
+import UserAvatar from "@/components/UserAvatar";
 
 interface PostPageProps {
   params: { slug: string };
@@ -71,9 +71,7 @@ export default async function PostPage({ params }: PostPageProps) {
           </h1>
           <div className="mb-8 flex items-center justify-between border-b border-gray-200 pb-8">
             <div className="flex items-center gap-4">
-              <div className="flex h-14 w-14 items-center justify-center rounded-full bg-gradient-to-br from-blue-500 to-blue-600 text-lg font-semibold text-white">
-                {getInitials(post.author.name)}
-              </div>
+              <UserAvatar authorName={post.author.name} />
               <div>
                 <p className="font-semibold text-gray-900">
                   {post.author.name}

@@ -4,9 +4,8 @@
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { CommentData } from "@/types/types";
-import { formatDate } from "@/app/dashboard/utils/formatDate";
-import { getInitials } from "@/utils/getInitials";
 import { timeAgo } from "@/utils/timeAgo";
+import UserAvatar from "@/components/UserAvatar";
 
 interface CommentListProps {
   slug: string;
@@ -62,9 +61,7 @@ export default function CommentList({ slug, refreshSignal }: CommentListProps) {
           className="rounded-lg border border-gray-100 bg-white p-4"
         >
           <div className="flex gap-4">
-            <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-blue-500 to-blue-600 text-xs font-semibold text-white">
-              {getInitials(c.author?.name)}
-            </div>
+            <UserAvatar authorName={c.author.name} size="small" />
             <div className="flex-1 space-y-2">
               <div className="flex items-center gap-2">
                 <span className="text-sm font-semibold text-gray-900">

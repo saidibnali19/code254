@@ -6,7 +6,7 @@ import toast from "react-hot-toast";
 import { useAuth } from "@/context/AuthContext";
 import LoginButton from "@/components/auth/LoginButton";
 import SignUpButton from "@/components/auth/SignUpButton";
-import { getInitials } from "@/utils/getInitials";
+import UserAvatar from "@/components/UserAvatar";
 
 interface CommentFormProps {
   slug: string;
@@ -82,9 +82,7 @@ export default function CommentForm({
 
   return (
     <form onSubmit={handleSubmit} className="flex gap-4">
-      <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-blue-500 to-blue-600 text-xs font-semibold text-white">
-        {getInitials(user.name)}
-      </div>
+      <UserAvatar authorName={user.name} size="small" />
       <div className="flex-1">
         <textarea
           value={content}

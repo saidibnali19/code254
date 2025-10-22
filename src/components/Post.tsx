@@ -3,6 +3,7 @@
 import { PostData } from "@/types/types";
 
 import ReadMoreButton from "./ReadMoreButton";
+import UserAvatar from "./UserAvatar";
 
 interface PostProps extends PostData {
   variant?: "white" | "gray";
@@ -26,14 +27,6 @@ export default function Post({
     typeof author === "object" && author !== null && "name" in author
       ? author.name
       : "Unknown Author";
-
-  // Generate initials safely
-  const getInitials = (name: string) => {
-    return name
-      .split(" ")
-      .map((word) => word.charAt(0).toUpperCase())
-      .join("");
-  };
 
   // Determine the background color based on the variant prop
   const bgColor = variant === "gray" ? "bg-gray-50" : "bg-white";
@@ -63,9 +56,7 @@ export default function Post({
       <div className="@container grid border-t border-gray-200 pt-4">
         <div className="grid gap-x-4 gap-y-2 @xs:grid-cols-2">
           <div className="flex gap-2">
-            <div className="flex h-14 w-14 items-center justify-center rounded-full bg-gradient-to-br from-blue-500 to-blue-600 text-lg font-semibold text-white">
-              {getInitials(authorName)}
-            </div>
+            <UserAvatar authorName={authorName} />
             <div className="grid gap-2">
               <p className="text-sm font-semibold text-gray-900">
                 {authorName}
