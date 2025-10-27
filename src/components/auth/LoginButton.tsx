@@ -12,7 +12,7 @@ export default function LoginButton({
     styles = "btn btn-secondary";
   } else {
     styles =
-      "hover:underline hover:decoration-2 focus-visible:underline focus-visible:decoration-2";
+      "hover:underline text-secondary hover:decoration-2 focus-visible:underline focus-visible:decoration-2";
   }
   return (
     <Link href={href} className={`${styles}`}>

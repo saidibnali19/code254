@@ -53,6 +53,10 @@
     @apply text-gray-50;
   }
 
+  .text-secondary {
+    @apply text-purple-700;
+  }
+
   .text-accent {
     @apply text-pink-500;
   }
