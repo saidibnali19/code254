@@ -14,17 +14,16 @@ export default function Navbar() {
 
   if (loading) return null; // avoid flicker on first load
 
-  const linkBase =
-    "rounded-lg px-3 py-2 text-sm font-medium transition-colors focus-visible:outline-none";
+  const linkBase = " font-medium  ";
   const inactiveLink =
-    "text-gray-700 hover:bg-gray-50 hover:text-blue-600 focus-visible:bg-gray-50 focus-visible:text-blue-600";
+    "text-accent underline  hover:text-white focus-visible:text-white focus-visible:outline-white ";
   const activeLink = "bg-gray-50 text-blue-600";
 
   return (
-    <nav className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-4 bg-white px-8 py-4 shadow-sm">
+    <nav className="bg-base text-base-100 mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-4 px-8 py-4 shadow-sm">
       <Link
         href="/"
-        className="text-2xl font-bold text-gray-900 focus-visible:outline-blue-600"
+        className="text-2xl font-bold focus-visible:outline-purple-100"
       >
         Code<span className="text-blue-600">254</span>
       </Link>

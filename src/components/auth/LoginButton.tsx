@@ -9,17 +9,13 @@ export default function LoginButton({
 }: LoginButtonProps) {
   let styles;
   if (variant === "button") {
-    styles =
-      "rounded-lg border border-blue-600 px-4 py-2 transition hover:bg-blue-600 hover:text-white focus-visible:bg-blue-600 focus-visible:text-white ";
+    styles = "btn btn-secondary";
   } else {
     styles =
       "hover:underline hover:decoration-2 focus-visible:underline focus-visible:decoration-2";
   }
   return (
-    <Link
-      href={href}
-      className={`text-blue-600 focus-visible:outline-none ${styles}`}
-    >
+    <Link href={href} className={`${styles}`}>
       Log In
     </Link>
   );
