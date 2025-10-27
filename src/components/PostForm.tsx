@@ -54,48 +54,53 @@ export default function PostForm({
   return (
     <form
       onSubmit={(e) => handleSubmit(e, true)}
-      className="mx-auto max-w-3xl space-y-4 rounded-2xl bg-white p-8 shadow-md"
+      className="bg-base-400 text-base-400 mx-auto max-w-3xl space-y-4 rounded-2xl p-8 shadow-md"
     >
-      <h1 className="text-2xl font-bold text-gray-900">
+      <h1 className="text-2xl font-bold">
         {buttonText.includes("Update") ? "Edit Post" : "Create New Post"}
       </h1>
 
       {/* Title */}
       <div className="space-y-2">
-        <label className="block text-sm font-medium text-gray-700">Title</label>
+        <label className="block text-sm font-medium" htmlFor="title">
+          Title
+        </label>
         <input
+          id="title"
           type="text"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
           required
-          className="w-full rounded-lg border border-gray-300 p-2 focus-visible:border-blue-500 focus-visible:outline-none"
+          className="form-input bg-base-300 w-full border-gray-700"
         />
       </div>
 
       {/* Content */}
       <div className="space-y-2">
-        <label className="block text-sm font-medium text-gray-700">
+        <label className="block text-sm font-medium" htmlFor="content">
           Content
         </label>
         <textarea
+          id="content"
           value={content}
           onChange={(e) => setContent(e.target.value)}
           rows={8}
           required
-          className="w-full rounded-lg border border-gray-300 p-2 focus-visible:border-blue-500 focus-visible:outline-none"
+          className="form-input bg-base-300 w-full border-gray-700"
         />
       </div>
 
       {/* Tags */}
       <div className="space-y-2">
-        <label className="block text-sm font-medium text-gray-700">
+        <label className="block text-sm font-medium" htmlFor="tags">
           Tags (comma-separated)
         </label>
         <input
+          id="tags"
           type="text"
           value={tags}
           onChange={(e) => setTags(e.target.value)}
-          className="w-full rounded-lg border border-gray-300 p-2 focus-visible:border-blue-500 focus-visible:outline-none"
+          className="form-input bg-base-300 w-full border-gray-700"
         />
       </div>
 
@@ -106,9 +111,9 @@ export default function PostForm({
           type="checkbox"
           checked={isFeatured}
           onChange={(e) => setIsFeatured(e.target.checked)}
-          className="h-4 w-4 rounded border-gray-300 text-blue-600 focus-visible:ring-blue-500"
+          className="h-4 w-4 rounded"
         />
-        <label htmlFor="isFeatured" className="text-sm text-gray-700">
+        <label htmlFor="isFeatured" className="text-sm">
           Mark as Featured
         </label>
       </div>
@@ -118,7 +123,7 @@ export default function PostForm({
         <button
           type="submit"
           disabled={loading}
-          className="flex-1 rounded-lg bg-blue-600 px-4 py-2 font-medium text-white transition hover:bg-blue-700 disabled:opacity-50"
+          className="btn btn-primary flex-1 disabled:cursor-not-allowed disabled:opacity-50"
         >
           {loading ? "Saving..." : buttonText}
         </button>
@@ -126,7 +131,7 @@ export default function PostForm({
           type="button"
           onClick={(e) => handleSubmit(e as any, false)}
           disabled={loading}
-          className="flex-1 rounded-lg bg-gray-200 px-4 py-2 font-medium text-gray-700 transition hover:bg-gray-300 disabled:opacity-50"
+          className="btn btn-inverted flex-1 disabled:cursor-not-allowed disabled:opacity-50"
         >
           Save as Draft
         </button>

@@ -15,40 +15,44 @@ export default function PostsTable({ posts }: PostsTableProps) {
     );
 
   return (
-    <div className="overflow-x-auto rounded-lg border border-gray-200 bg-white shadow">
-      <table className="min-w-full divide-y divide-gray-200 text-sm">
-        <thead className="bg-gray-100 text-left text-gray-700">
-          <tr className="border-b border-gray-200 bg-gray-100">
-            <th className="px-6 py-4 text-left text-xs font-semibold tracking-wider text-gray-700 uppercase">
+    <div className="bg-base-300 overflow-x-auto rounded-lg border border-gray-200 shadow">
+      <table className="text-base-300 min-w-full divide-y divide-gray-200 text-sm">
+        <thead className="bg-gray-500 text-left">
+          <tr className="border-b border-gray-200 bg-gray-500">
+            <th className="px-6 py-4 text-left text-xs font-semibold tracking-wider uppercase">
               Title
             </th>
-            <th className="hidden px-6 py-4 text-left text-xs font-semibold tracking-wider text-gray-700 uppercase md:table-cell">
+            <th className="hidden px-6 py-4 text-left text-xs font-semibold tracking-wider uppercase md:table-cell">
               Status
             </th>
-            <th className="hidden px-6 py-4 text-left text-xs font-semibold tracking-wider text-gray-700 uppercase md:table-cell">
+            <th className="hidden px-6 py-4 text-left text-xs font-semibold tracking-wider uppercase md:table-cell">
               Created
             </th>
-            <th className="hidden px-6 py-4 text-left text-xs font-semibold tracking-wider text-gray-700 uppercase md:table-cell">
+            <th className="hidden px-6 py-4 text-left text-xs font-semibold tracking-wider uppercase md:table-cell">
               Updated
             </th>
-            <th className="hidden px-6 py-4 text-left text-xs font-semibold tracking-wider text-gray-700 uppercase md:table-cell">
+            <th className="hidden px-6 py-4 text-left text-xs font-semibold tracking-wider uppercase md:table-cell">
               Views
             </th>
-            <th className="px-6 py-4 text-left text-xs font-semibold tracking-wider text-gray-700 uppercase">
+            <th className="px-6 py-4 text-left text-xs font-semibold tracking-wider uppercase">
               Actions
             </th>
           </tr>
         </thead>
         <tbody className="divide-y divide-gray-100">
           {posts.map((post) => (
-            <tr key={post._id} className="hover:bg-gray-50">
+            <tr
+              key={post._id}
+              className="even:bg-gray-700 hover:bg-gray-400 hover:text-gray-900"
+            >
               <td className="space-y-1 px-6 py-4">
-                <div className="text-sm font-medium text-gray-900">
-                  {post.title}
-                </div>
+                <div className="text-sm font-medium">{post.title}</div>
                 <div className="space-x-2">
                   {post.tags.map((tag) => (
-                    <span className="text-xs text-gray-500" key={tag}>
+                    <span
+                      className="btn btn-inverted px-2 py-0.5 text-xs"
+                      key={tag}
+                    >
                       {tag}
                     </span>
                   ))}
@@ -65,15 +69,13 @@ export default function PostsTable({ posts }: PostsTableProps) {
                   </span>
                 )}
               </td>
-              <td className="hidden px-6 py-4 text-gray-600 md:table-cell">
+              <td className="hidden px-6 py-4 md:table-cell">
                 {formatDate(post.createdAt)}
               </td>
-              <td className="hidden px-6 py-4 text-gray-600 md:table-cell">
+              <td className="hidden px-6 py-4 md:table-cell">
                 {formatDate(post.updatedAt)}
               </td>
-              <td className="hidden px-6 py-4 text-gray-600 md:table-cell">
-                10 views
-              </td>
+              <td className="hidden px-6 py-4 md:table-cell">10 views</td>
               <td className="px-6 py-4">
                 <div className="flex gap-2">
                   <Link

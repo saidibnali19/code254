@@ -6,7 +6,7 @@ import ReadMoreButton from "./ReadMoreButton";
 import UserAvatar from "./UserAvatar";
 
 interface PostProps extends PostData {
-  variant?: "white" | "gray";
+  variant?: "primary" | "secondary";
   buttonVariant?: "no-icon" | "with-icon";
 }
 
@@ -17,7 +17,7 @@ export default function Post({
   author,
   createdAt,
   tags,
-  variant = "white",
+  variant = "primary",
   buttonVariant = "no-icon",
 }: PostProps) {
   const firsrtFewWords = content.split(" ").slice(0, 12).join(" ");
@@ -29,11 +29,17 @@ export default function Post({
       : "Unknown Author";
 
   // Determine the background color based on the variant prop
-  const bgColor = variant === "gray" ? "bg-gray-50" : "bg-white";
+  let bgColor;
+
+  if (variant === "primary") {
+    bgColor = "bg-primary";
+  } else {
+    bgColor = "bg-secondary";
+  }
 
   return (
     <article
-      className={`row-span-4 mx-auto grid max-w-7xl grid-rows-subgrid gap-4 rounded-2xl ${bgColor} p-6 shadow-md transition-shadow duration-300 hover:shadow-lg`}
+      className={`row-span-4 mx-auto grid max-w-7xl grid-rows-subgrid gap-4 rounded-2xl ${bgColor} text-base-400 p-6 shadow-md transition-shadow duration-300 hover:shadow-lg`}
     >
       <div className="flex flex-wrap items-start gap-2">
         {tags &&
@@ -46,10 +52,8 @@ export default function Post({
             </span>
           ))}
       </div>
-      <h2 className="text-2xl leading-tight font-bold text-gray-900">
-        {title}
-      </h2>
-      <p className="leading-relaxed text-gray-600">
+      <h2 className="text-2xl leading-tight font-bold">{title}</h2>
+      <p className="leading-relaxed">
         {firsrtFewWords}
         {content.split(" ").length > 6 ? "..." : ""}
       </p>
@@ -58,10 +62,8 @@ export default function Post({
           <div className="flex gap-2">
             <UserAvatar authorName={authorName} />
             <div className="grid gap-2">
-              <p className="text-sm font-semibold text-gray-900">
-                {authorName}
-              </p>
-              <p className="text-sm text-gray-500">
+              <p className="text-sm font-semibold">{authorName}</p>
+              <p className="text-sm">
                 Published on {new Date(createdAt).toLocaleDateString()}
               </p>
             </div>

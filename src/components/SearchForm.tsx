@@ -38,13 +38,10 @@ export default function SearchForm() {
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           placeholder="Search articles..."
-          className="w-full rounded-lg border border-gray-300 px-4 py-3 focus:border-transparent focus:ring-2 focus:ring-blue-600 focus:outline-none"
+          className="form-input w-full"
         />
       </div>
-      <button
-        type="submit"
-        className="rounded-lg bg-blue-600 px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-blue-700 focus-visible:bg-blue-700 focus-visible:outline-none"
-      >
+      <button type="submit" className="btn btn-primary">
         Search
       </button>
     </form>

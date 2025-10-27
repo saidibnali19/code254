@@ -39,62 +39,61 @@ export default function ProfileEditForm({ initial, onSaved, onCancel }: Props) {
   };
 
   return (
-    <div className="rounded-lg border border-gray-200 bg-white p-6 shadow">
-      <h2 className="mb-4 text-xl font-semibold text-gray-900">Edit profile</h2>
-
-      <div className="space-y-4">
-        <div>
-          <label className="block text-sm font-medium text-gray-700">
-            Display name
-          </label>
-          <input
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            className="mt-1 w-full rounded-lg border border-gray-300 p-2 focus-visible:border-blue-500 focus-visible:outline-none"
-            type="text"
-          />
-        </div>
-
-        <div>
-          <label className="block text-sm font-medium text-gray-700">Bio</label>
-          <textarea
-            value={bio}
-            onChange={(e) => setBio(e.target.value)}
-            rows={4}
-            className="mt-1 w-full rounded-lg border border-gray-300 p-2 focus-visible:border-blue-500 focus-visible:outline-none"
-          />
-        </div>
-
-        <div>
-          <label className="block text-sm font-medium text-gray-700">
-            Avatar URL
-          </label>
-          <input
-            value={avatar}
-            onChange={(e) => setAvatar(e.target.value)}
-            className="mt-1 w-full rounded-lg border border-gray-300 p-2 focus-visible:border-blue-500 focus-visible:outline-none"
-            placeholder="https://..."
-            type="url"
-          />
-        </div>
-
-        <div className="flex gap-3">
-          <button
-            onClick={handleSave}
-            disabled={loading}
-            className="rounded-lg bg-blue-600 px-4 py-2 text-white hover:bg-blue-700 disabled:opacity-50"
-          >
-            {loading ? "Saving..." : "Save"}
-          </button>
-
-          <button
-            onClick={onCancel}
-            disabled={loading}
-            className="rounded-lg bg-gray-100 px-4 py-2 text-gray-700 hover:bg-gray-200 disabled:opacity-50"
-          >
-            Cancel
-          </button>
-        </div>
+    <div className="flex min-h-screen items-center justify-center px-4">
+      <div className="bg-base-400 text-base-400 space-y-4 rounded-lg border border-gray-200 px-4 py-10 shadow sm:px-6 sm:py-12 lg:px-8 lg:py-16">
+        <h2 className="mb-4 text-xl font-semibold">Edit profile</h2>
+        <form className="space-y-4">
+          <div className="space-y-2">
+            <label className="block text-sm font-medium" htmlFor="name">
+              Display name
+            </label>
+            <input
+              id="name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              className="form-input bg-base-300 w-full border-gray-700"
+              type="text"
+            />
+          </div>
+          <div className="space-y-2">
+            <label className="block text-sm font-medium" htmlFor="bio">
+              Bio
+            </label>
+            <textarea
+              id="bio"
+              value={bio}
+              onChange={(e) => setBio(e.target.value)}
+              rows={4}
+              className="form-input bg-base-300 w-full border-gray-700 sm:min-w-xs"
+            />
+          </div>
+          <div className="space-y-2">
+            <label className="block text-sm font-medium">Avatar URL</label>
+            <input
+              value={avatar}
+              onChange={(e) => setAvatar(e.target.value)}
+              className="form-input bg-base-300 w-full border-gray-700"
+              placeholder="https://..."
+              type="url"
+            />
+          </div>
+          <div className="flex gap-3">
+            <button
+              onClick={handleSave}
+              disabled={loading}
+              className="btn btn-primary disabled:cursor-not-allowed disabled:opacity-50"
+            >
+              {loading ? "Saving..." : "Save"}
+            </button>
+            <button
+              onClick={onCancel}
+              disabled={loading}
+              className="btn btn-inverted disabled:cursor-not-allowed disabled:opacity-50"
+            >
+              Cancel
+            </button>
+          </div>
+        </form>
       </div>
     </div>
   );

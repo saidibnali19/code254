@@ -6,7 +6,6 @@ import ProtectedRoute from "@/components/auth/ProtectedRoute";
 import toast from "react-hot-toast";
 import ProfileView from "./components/ProfileView";
 import ProfileEditForm from "./components/ProfileEditForm";
-import { PostData } from "@/types/types";
 
 export default function ProfilePage() {
   const [user, setUser] = useState<any | null>(null);
@@ -74,21 +73,23 @@ export default function ProfilePage() {
 
   return (
     <ProtectedRoute>
-      {!editing ? (
-        <>
-          <ProfileView
-            user={user}
-            postCount={postCount}
-            setEditing={setEditing}
+      <div className="bg-base-300 text-base-400">
+        {!editing ? (
+          <>
+            <ProfileView
+              user={user}
+              postCount={postCount}
+              setEditing={setEditing}
+            />
+          </>
+        ) : (
+          <ProfileEditForm
+            initial={user}
+            onSaved={handleUpdated}
+            onCancel={() => setEditing(false)}
           />
-        </>
-      ) : (
-        <ProfileEditForm
-          initial={user}
-          onSaved={handleUpdated}
-          onCancel={() => setEditing(false)}
-        />
-      )}
+        )}
+      </div>
     </ProtectedRoute>
   );
 }

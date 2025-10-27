@@ -26,11 +26,11 @@ export default function ProfileView({ user, setEditing, postCount }: any) {
           </div>
           {/* User Info */}
           <div className="flex-1 space-y-2 text-center sm:text-left">
-            <h1 className="text-3xl font-bold text-gray-900">{user.name}</h1>
-            <p className="text-gray-600">{user.email}</p>
+            <h1 className="text-3xl font-bold">{user.name}</h1>
+            <p>{user.email}</p>
 
             <div className="mb-4 flex flex-wrap items-center justify-center gap-4 sm:justify-start">
-              <div className="flex items-center gap-2 text-sm text-gray-600">
+              <div className="flex items-center gap-2 text-sm">
                 <svg
                   className="h-4 w-4"
                   fill="none"
@@ -46,7 +46,7 @@ export default function ProfileView({ user, setEditing, postCount }: any) {
                 </svg>
                 <span>Joined {formatDate(user.createdAt)}</span>
               </div>
-              <div className="flex items-center gap-2 text-sm text-gray-600">
+              <div className="flex items-center gap-2 text-sm">
                 <svg
                   className="h-4 w-4"
                   fill="none"
@@ -68,7 +68,7 @@ export default function ProfileView({ user, setEditing, postCount }: any) {
 
             <button
               onClick={() => setEditing(true)}
-              className="inline-flex items-center gap-2 rounded-lg bg-blue-600 px-6 py-2.5 text-sm font-medium text-white transition-colors hover:bg-blue-700 focus-visible:bg-blue-700 focus-visible:outline-none"
+              className="btn btn-primary inline-flex items-center gap-2"
             >
               <svg
                 className="h-4 w-4"
@@ -88,33 +88,33 @@ export default function ProfileView({ user, setEditing, postCount }: any) {
           </div>
         </div>
       </div>
-      <article className="bg-gray-50 px-4 py-10 sm:px-6 sm:py-12 lg:px-8 lg:py-16">
+      <article className="bg-base-400 px-4 py-10 sm:px-6 sm:py-12 lg:px-8 lg:py-16">
         <div className="mx-auto max-w-5xl space-y-4">
           {/* Bio Section */}
-          <div className="space-y-4 rounded-xl border border-gray-200 bg-white p-8">
-            <h2 className="text-xl font-bold text-gray-900">About</h2>
+          <div className="bg-base-400 space-y-4 rounded-xl border border-gray-200 p-8">
+            <h2 className="text-xl font-bold">About</h2>
             {user.bio ? (
-              <p className="leading-relaxed text-gray-700">{user.bio}</p>
+              <p className="leading-relaxed">{user.bio}</p>
             ) : (
-              <p className="leading-relaxed text-gray-700">
+              <p className="leading-relaxed">
                 No bio yet. Tell people about yourself.
               </p>
             )}
           </div>
 
           {/* Quick Links */}
-          <div className="space-y-4 rounded-xl border border-gray-200 bg-white p-8">
-            <h3 className="text-lg font-bold text-gray-900">Quick Links</h3>
-            <div className="space-y-2">
+          <div className="bg-base-400 space-y-4 rounded-xl border border-gray-200 p-8">
+            <h3 className="text-lg font-bold">Quick Links</h3>
+            <div className="flex flex-col gap-4 pl-4">
               <Link
                 href={"/dashboard"}
-                className="block rounded-lg px-4 py-2 text-sm text-gray-700 transition-colors hover:bg-gray-50 hover:text-blue-600 focus-visible:bg-gray-50 focus-visible:text-blue-600 focus-visible:outline-none"
+                className="text-accent hover:text-white focus-visible:text-white focus-visible:outline-white"
               >
                 Dashboard
               </Link>
               <Link
                 href={"/posts/new"}
-                className="block rounded-lg px-4 py-2 text-sm text-gray-700 transition-colors hover:bg-gray-50 hover:text-blue-600 focus-visible:bg-gray-50 focus-visible:text-blue-600 focus-visible:outline-none"
+                className="text-accent hover:text-white focus-visible:text-white focus-visible:outline-white"
               >
                 Create New Post
               </Link>
