@@ -47,11 +47,11 @@ export default async function AllPostsPage({
   }
 
   return (
-    <article className="">
-      <div className="mx-auto max-w-7xl space-y-4 px-4 py-10 sm:px-6 sm:py-12 lg:px-8 lg:py-16">
-        <div className="space-y-4">
-          <h1 className="text-4xl font-bold text-gray-900 md:text-5xl">Blog</h1>
-          <p className="text-lg text-gray-600">
+    <article>
+      <div className="bg-base-300 mx-auto max-w-7xl space-y-4 px-4 py-10 sm:px-6 sm:py-12 lg:px-8 lg:py-16">
+        <div className="text-base-400 space-y-4">
+          <h1 className="text-4xl font-bold md:text-5xl">Blog</h1>
+          <p className="text-lg">
             Explore articles on web development, programming, and modern
             technology practices.
           </p>
@@ -59,7 +59,7 @@ export default async function AllPostsPage({
         <SearchForm />
       </div>
 
-      <ul className="mx-auto grid max-w-7xl grid-cols-[repeat(auto-fit,minmax(25rem,1fr))] grid-rows-[auto_auto_1fr_auto] gap-8 bg-gray-50 px-4 py-10 sm:px-6 sm:py-12 lg:px-8 lg:py-16">
+      <ul className="bg-base-400 mx-auto grid max-w-7xl grid-cols-[repeat(auto-fit,minmax(25rem,1fr))] grid-rows-[auto_auto_1fr_auto] gap-8 px-4 py-10 sm:px-6 sm:py-12 lg:px-8 lg:py-16">
         {posts.map((post: PostData) => (
           <li key={post._id} className="row-span-4 grid grid-rows-subgrid">
             <Post
@@ -76,7 +76,9 @@ export default async function AllPostsPage({
         ))}
       </ul>
 
-      <Pagination totalPages={totalPages} currentPage={currentPage} />
+      <div className="bg-base-300">
+        <Pagination totalPages={totalPages} currentPage={currentPage} />
+      </div>
     </article>
   );
 }

@@ -29,8 +29,7 @@ export default function Post({
       : "Unknown Author";
 
   // Determine the background color based on the variant prop
-  let bgColor, color;
-  color = "text-base-100";
+  let bgColor;
 
   if (variant === "primary") {
     bgColor = "bg-primary";
@@ -40,7 +39,7 @@ export default function Post({
 
   return (
     <article
-      className={`row-span-4 mx-auto grid max-w-7xl grid-rows-subgrid gap-4 rounded-2xl ${bgColor} ${color} p-6 shadow-md transition-shadow duration-300 hover:shadow-lg`}
+      className={`row-span-4 mx-auto grid max-w-7xl grid-rows-subgrid gap-4 rounded-2xl ${bgColor} text-base-400 p-6 shadow-md transition-shadow duration-300 hover:shadow-lg`}
     >
       <div className="flex flex-wrap items-start gap-2">
         {tags &&

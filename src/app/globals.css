@@ -1,5 +1,11 @@
 @import "tailwindcss";
 
+@layer base {
+  html {
+    accent-color: var(--color-pink-500);
+  }
+}
+
 @layer components {
   .btn {
     @apply cursor-pointer rounded-md p-[.5lh_2ch] font-medium transition;
@@ -16,14 +22,26 @@
   .btn-accent {
     @apply bg-pink-500 hover:bg-pink-600 focus-visible:bg-pink-600 focus-visible:outline-pink-100;
   }
+
+  .btn-inverted {
+    @apply border border-gray-100 text-white -outline-offset-1 hover:bg-blue-200 hover:text-gray-900 focus-visible:bg-blue-200 focus-visible:text-gray-900;
+  }
+
+  .form-input {
+    @apply rounded-sm border border-gray-800 bg-gray-900 p-[.5lh_2ch] text-white focus-visible:outline-white;
+  }
 }
 @layer utilities {
-  .bg-base {
+  .bg-base-400 {
     @apply bg-gray-900;
   }
 
+  .bg-base-300 {
+    @apply bg-gray-800;
+  }
+
   /* This class is named as such because Tailwind has a class called text-base */
-  .text-base-100 {
+  .text-base-400 {
     @apply text-white;
   }
 
@@ -37,5 +55,9 @@
 
   .bg-secondary {
     @apply bg-purple-700;
+  }
+
+  .border-base-300 {
+    @apply border-gray-800;
   }
 }

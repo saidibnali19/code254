@@ -27,7 +27,7 @@ export default function LatestArticles() {
 
   if (loading)
     return (
-      <section className="bg-base mx-auto max-w-7xl px-6 py-12">
+      <section className="bg-base-400 mx-auto max-w-7xl px-6 py-12">
         <h2 className="mb-6 text-2xl font-semibold">Latest Articles</h2>
         <p className="text-gray-500">Loading...</p>
       </section>
@@ -35,19 +35,19 @@ export default function LatestArticles() {
 
   if (!posts.length)
     return (
-      <section className="bg-base mx-auto max-w-7xl px-6 py-12">
+      <section className="bg-base-400 mx-auto max-w-7xl px-6 py-12">
         <h2 className="mb-6 text-2xl font-semibold">Latest Articles</h2>
         <p className="text-gray-500">No recent articles available.</p>
       </section>
     );
 
   return (
-    <section className="bg-base mx-auto max-w-7xl space-y-4 px-4 py-10 sm:px-6 sm:py-12 lg:px-8 lg:py-16">
+    <section className="bg-base-400 mx-auto max-w-7xl space-y-4 px-4 py-10 sm:px-6 sm:py-12 lg:px-8 lg:py-16">
       <div className="space-y-4">
-        <h2 className="text-base-100 text-3xl font-bold uppercase">
+        <h2 className="text-base-400 text-3xl font-bold uppercase">
           Latest Articles
         </h2>
-        <p className="text-base-100">
+        <p className="text-base-400">
           Stay updated with our newest content and insights
         </p>
       </div>
