@@ -40,9 +40,17 @@
     @apply bg-gray-800;
   }
 
+  .bg-base-200 {
+    @apply bg-gray-300;
+  }
+
   /* This class is named as such because Tailwind has a class called text-base */
   .text-base-400 {
     @apply text-white;
+  }
+
+  .text-base-300 {
+    @apply text-gray-50;
   }
 
   .text-accent {

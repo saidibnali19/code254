@@ -30,7 +30,7 @@ export default function Tabs({ tabs, children }: TabsProps) {
   };
 
   return (
-    <div className="w-full">
+    <div className="bg-base-400 text-base-400 w-full rounded-lg px-4 pb-4">
       {/* Tabs header */}
       <div
         role="tablist"
@@ -49,12 +49,12 @@ export default function Tabs({ tabs, children }: TabsProps) {
             className={`flex items-center gap-1 px-4 py-3 text-sm font-medium transition-all duration-300 ${
               activeTab === tab.value
                 ? "border-b-2 border-blue-600 text-blue-600"
-                : "text-gray-600 hover:text-blue-500"
+                : "hover:text-blue-500"
             }`}
           >
             {tab.label}
             {typeof tab.count === "number" && (
-              <span className="ml-2 rounded-full bg-gray-100 px-2 py-0.5 text-xs text-gray-600">
+              <span className="btn btn-inverted ml-2 rounded-full px-2 py-0.5 text-xs hover:cursor-default">
                 {tab.count}
               </span>
             )}
