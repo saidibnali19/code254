@@ -66,8 +66,6 @@ export default function Navbar() {
       <div className="flex items-center gap-4">
         {user ? (
           <>
-            <span className="text-gray-700">Welcome, {user.name}</span>
-
             <Link
               href="/profile"
               className="outline-offset-2 transition hover:scale-110 focus-visible:scale-110 focus-visible:outline-none"
