@@ -2,17 +2,15 @@ import { NextRequest, NextResponse } from "next/server";
 import { dbConnect } from "@/lib/dbConnect";
 import Post from "@/models/Post";
 
-export async function GET(
-  req: NextRequest,
-  { params }: { params: { slug: string } },
-) {
+export async function GET(req: NextRequest, context: any) {
   try {
     await dbConnect();
 
-    const { slug } = params;
+    const { slug } = context.params;
 
     // ✅ Find post by slug
-    const post = await Post.findOne({ slug })
+    const post = await (Post as any)
+      .findOne({ slug })
       .populate("author", "name email")
       .lean();
 
@@ -33,14 +31,11 @@ export async function GET(
   }
 }
 
-export async function PUT(
-  req: NextRequest,
-  { params }: { params: { slug: string } },
-) {
+export async function PUT(req: NextRequest, context: any) {
   try {
     await dbConnect();
 
-    const { slug } = params;
+    const { slug } = context.params;
     const body = await req.json();
 
     const { title, content, tags, isFeatured, published } = body;
@@ -52,18 +47,20 @@ export async function PUT(
       );
     }
 
-    const updatedPost = await Post.findOneAndUpdate(
-      { slug },
-      {
-        title,
-        content,
-        tags: tags || [],
-        isFeatured: Boolean(isFeatured),
-        published: Boolean(published),
-        updatedAt: new Date(),
-      },
-      { new: true },
-    ).populate("author", "name email");
+    const updatedPost = await (Post as any)
+      .findOneAndUpdate(
+        { slug },
+        {
+          title,
+          content,
+          tags: tags || [],
+          isFeatured: Boolean(isFeatured),
+          published: Boolean(published),
+          updatedAt: new Date(),
+        },
+        { new: true },
+      )
+      .populate("author", "name email");
 
     if (!updatedPost) {
       return NextResponse.json(
@@ -86,15 +83,12 @@ export async function PUT(
   }
 }
 
-export async function DELETE(
-  req: NextRequest,
-  { params }: { params: { slug: string } },
-) {
+export async function DELETE(req: NextRequest, context: any) {
   try {
     await dbConnect();
-    const { slug } = params;
+    const { slug } = context.params;
 
-    const deletedPost = await Post.findOneAndDelete({ slug });
+    const deletedPost = await (Post as any).findOneAndDelete({ slug });
 
     if (!deletedPost) {
       return NextResponse.json(

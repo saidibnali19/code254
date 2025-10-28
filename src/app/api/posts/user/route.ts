@@ -1,10 +1,10 @@
-import { NextResponse } from "next/server";
+import { NextResponse, NextRequest } from "next/server";
 import { dbConnect } from "@/lib/dbConnect";
 import { verifyJWT } from "@/lib/verifyJWT";
 import Post from "@/models/Post";
 import User from "@/models/User";
 
-export async function GET(req: Request) {
+export async function GET(req: NextRequest) {
   try {
     await dbConnect();
 
@@ -27,7 +27,9 @@ export async function GET(req: Request) {
     }
 
     // ✅ Ensure user exists
-    const user = await User.findById(decoded.userId).select("_id name email");
+    const user = await (User as any)
+      .findById(decoded.userId)
+      .select("_id name email");
     if (!user) {
       return NextResponse.json(
         { ok: false, error: "User not found" },
@@ -44,7 +46,8 @@ export async function GET(req: Request) {
     else if (publishedParam === "false") filter.published = false;
 
     // ✅ Query posts by author (optionally filtered)
-    const posts = await Post.find(filter)
+    const posts = await (Post as any)
+      .find(filter)
       .sort({ createdAt: -1 })
       .populate("author", "name email")
       .lean();

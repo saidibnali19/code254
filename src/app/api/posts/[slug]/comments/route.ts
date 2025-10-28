@@ -5,15 +5,12 @@ import Comment from "@/models/Comment";
 import User from "@/models/User";
 import { verifyJWT } from "@/lib/verifyJWT";
 
-export async function GET(
-  req: NextRequest,
-  { params }: { params: { slug: string } },
-) {
+export async function GET(req: NextRequest, context: any) {
   try {
     await dbConnect();
-    const { slug } = params;
+    const { slug } = context.params;
 
-    const post = await Post.findOne({ slug }).lean();
+    const post = await (Post as any).findOne({ slug }).lean();
     if (!post) {
       return NextResponse.json(
         { ok: false, error: "Post not found" },
@@ -22,7 +19,8 @@ export async function GET(
     }
 
     // Get comments for this post, populate author name
-    const comments = await Comment.find({ post: post._id })
+    const comments = await (Comment as any)
+      .find({ post: post._id })
       .sort({ createdAt: 1 }) // chronological
       .populate("author", "name")
       .lean();
@@ -52,13 +50,10 @@ export async function GET(
   }
 }
 
-export async function POST(
-  req: NextRequest,
-  { params }: { params: { slug: string } },
-) {
+export async function POST(req: NextRequest, context: any) {
   try {
     await dbConnect();
-    const { slug } = params;
+    const { slug } = context.params;
 
     // Authenticate user via cookie
     const token = req.cookies.get("accessToken")?.value;
@@ -76,7 +71,9 @@ export async function POST(
       );
     }
 
-    const user = await User.findById(decoded.userId).select("name email");
+    const user = await (User as any)
+      .findById(decoded.userId)
+      .select("name email");
     if (!user) {
       return NextResponse.json(
         { ok: false, error: "User not found" },
@@ -84,7 +81,7 @@ export async function POST(
       );
     }
 
-    const post = await Post.findOne({ slug }).lean();
+    const post = await (Post as any).findOne({ slug }).lean();
     if (!post) {
       return NextResponse.json(
         { ok: false, error: "Post not found" },
@@ -102,7 +99,7 @@ export async function POST(
       );
     }
 
-    const newComment = await Comment.create({
+    const newComment = await (Comment as any).create({
       post: post._id,
       author: user._id,
       content: content.trim(),
@@ -111,7 +108,8 @@ export async function POST(
     // populate author name
     const populated =
       (await newComment.populate("author", "name").execPopulate?.()) ??
-      (await Comment.findById(newComment._id)
+      (await (Comment as any)
+        .findById(newComment._id)
         .populate("author", "name")
         .lean());
 

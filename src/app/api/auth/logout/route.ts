@@ -1,13 +1,14 @@
 import { NextResponse } from "next/server";
-import { cookies } from "next/headers";
 import { dbConnect } from "@/lib/dbConnect";
 import RefreshToken from "@/models/RefreshToken";
+import { getCookie } from "@/lib/jwt";
 
 export async function POST() {
   try {
     await dbConnect();
 
-    const refreshId = cookies().get("refreshtoken")?.value;
+    const refreshId = await getCookie("refreshToken");
+
     if (refreshId) {
       await RefreshToken.deleteOne({ tokenId: refreshId });
     }

@@ -40,7 +40,9 @@ export default function Tabs({ tabs, children }: TabsProps) {
         {tabs.map((tab, i) => (
           <button
             key={tab.value}
-            ref={(el) => (tabRefs.current[i] = el)}
+            ref={(el) => {
+              tabRefs.current[i] = el;
+            }}
             role="tab"
             aria-selected={activeTab === tab.value}
             tabIndex={activeTab === tab.value ? 0 : -1}

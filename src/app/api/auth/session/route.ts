@@ -26,7 +26,9 @@ export async function GET(req: Request) {
       );
     }
 
-    const user = await User.findById(decoded.userId).select("name email");
+    const user = await (User as any)
+      .findById(decoded.userId)
+      .select("name email");
     if (!user) {
       return NextResponse.json(
         { ok: false, error: "User not found" },

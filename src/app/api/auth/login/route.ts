@@ -20,7 +20,7 @@ export async function POST(req: Request) {
       );
     }
 
-    const user = await User.findOne({ email });
+    const user = await (User as any).findOne({ email });
     if (!user) {
       return NextResponse.json(
         { ok: false, error: "Invalid credentials" },

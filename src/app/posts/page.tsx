@@ -3,13 +3,9 @@ import Post from "@/components/Post";
 import SearchForm from "@/components/SearchForm";
 import { PostData } from "@/types/types";
 
-export default async function AllPostsPage({
-  searchParams,
-}: {
-  searchParams: { search?: string; page?: string };
-}) {
-  const query = searchParams?.search || "";
-  const page = searchParams?.page || "1";
+export default async function AllPostsPage(context: any) {
+  const query = context.searchParams?.search || "";
+  const page = context.searchParams?.page || "1";
 
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_BASE_URL}/api/posts?limit=6&page=${page}${

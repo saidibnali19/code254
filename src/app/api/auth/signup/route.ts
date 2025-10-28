@@ -19,7 +19,7 @@ export async function POST(req: Request) {
       );
     }
 
-    const existingUser = await User.findOne({ email });
+    const existingUser = await (User as any).findOne({ email });
     if (existingUser) {
       return NextResponse.json(
         { ok: false, error: "Email already registered" },
@@ -27,7 +27,7 @@ export async function POST(req: Request) {
       );
     }
 
-    const newUser = await User.create({ name, email, password });
+    const newUser = await (User as any).create({ name, email, password });
 
     // Create token
     const accesstoken = jwt.sign(

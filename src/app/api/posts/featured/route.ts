@@ -9,7 +9,8 @@ export async function GET() {
     await dbConnect();
 
     // ✅ Fetch the first featured post
-    const post = (await Post.findOne({ isFeatured: true })
+    const post = (await (Post as any)
+      .findOne({ isFeatured: true })
       .sort({ createdAt: -1 })
       .populate("author", "name email")
       .lean()) as PostData | null;

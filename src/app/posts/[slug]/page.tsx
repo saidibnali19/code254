@@ -4,10 +4,6 @@ import Link from "next/link";
 import CommentsSection from "../components/CommentsSection";
 import UserAvatar from "@/components/UserAvatar";
 
-interface PostPageProps {
-  params: { slug: string };
-}
-
 async function getPost(slug: string) {
   try {
     const res = await fetch(
@@ -29,9 +25,9 @@ async function getPost(slug: string) {
   }
 }
 
-export default async function PostPage({ params }: PostPageProps) {
-  const slug = params.slug;
-  const post = await getPost(params.slug);
+export default async function PostPage(context: any) {
+  const slug = context.params.slug;
+  const post = await getPost(context.params.slug);
 
   if (!post) {
     notFound();

@@ -1,11 +1,11 @@
 // app/api/profile/route.ts
-import { NextResponse } from "next/server";
+import { NextResponse, NextRequest } from "next/server";
 
 import { dbConnect } from "@/lib/dbConnect";
 import { verifyJWT } from "@/lib/verifyJWT";
 import User from "@/models/User";
 
-export async function GET(req: Request) {
+export async function GET(req: NextRequest) {
   try {
     await dbConnect();
 
@@ -28,7 +28,10 @@ export async function GET(req: Request) {
       );
     }
 
-    const user = await User.findById(decoded.userId).select("-password").lean();
+    const user = await (User as any)
+      .findById(decoded.userId)
+      .select("-password")
+      .lean();
     if (!user) {
       return NextResponse.json(
         { ok: false, error: "User not found" },
@@ -54,7 +57,7 @@ export async function GET(req: Request) {
   }
 }
 
-export async function PUT(req: Request) {
+export async function PUT(req: NextRequest) {
   try {
     await dbConnect();
 
@@ -85,15 +88,16 @@ export async function PUT(req: Request) {
       );
     }
 
-    const updated = await User.findByIdAndUpdate(
-      decoded.userId,
-      {
-        name,
-        bio: bio ?? "",
-        avatar: avatar ?? "",
-      },
-      { new: true },
-    )
+    const updated = await (User as any)
+      .findByIdAndUpdate(
+        decoded.userId,
+        {
+          name,
+          bio: bio ?? "",
+          avatar: avatar ?? "",
+        },
+        { new: true },
+      )
       .select("-password")
       .lean();
 
