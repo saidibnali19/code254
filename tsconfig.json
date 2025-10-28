@@ -31,7 +31,8 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     "test-mongo-client.js",
-    "src/types"
+    "src/types",
+    "next.config.js"
   ],
   "exclude": ["node_modules"]
 }

@@ -1,10 +1,13 @@
 "use client";
 
+export const dynamic = "force-dynamic";
+
+import { Suspense } from "react";
 import LoginButton from "@/components/auth/LoginButton";
 import SignUpButton from "@/components/auth/SignUpButton";
 import { useSearchParams } from "next/navigation";
 
-export default function AuthRequiredPage() {
+function AuthRequiredPageContent() {
   const searchParams = useSearchParams();
   const redirect = searchParams.get("redirect") || "/";
 
@@ -19,5 +22,13 @@ export default function AuthRequiredPage() {
       </p>
       <div className="mt-4 flex gap-4"></div>
     </div>
+  );
+}
+
+export default function AuthRequiredPage() {
+  return (
+    <Suspense fallback={<div>Loading login page...</div>}>
+      <AuthRequiredPageContent />
+    </Suspense>
   );
 }
