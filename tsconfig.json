@@ -6,10 +6,7 @@
     "skipLibCheck": true,
     "strict": true,
     "noEmit": true,
-<<<<<<< HEAD
     "noEmitOnError": false,
-=======
->>>>>>> 9677850eebfaa9334ee7ac4e1be8c5cfb412766b
     "esModuleInterop": true,
     "module": "esnext",
     "moduleResolution": "bundler",
@@ -31,12 +28,8 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-<<<<<<< HEAD
-    "test-mongo-client.js"
-=======
     "test-mongo-client.js",
     "src/types"
->>>>>>> 9677850eebfaa9334ee7ac4e1be8c5cfb412766b
   ],
   "exclude": ["node_modules"]
 }
