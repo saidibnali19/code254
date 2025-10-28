@@ -3,6 +3,7 @@
 
 import { PostData } from "@/types/types";
 import { useEffect, useState } from "react";
+import TipTapEditor from "./editor/TipTapEditor";
 
 interface PostFormProps {
   onSubmit: (postData: PostData, publishStatus: boolean) => Promise<void>;
@@ -80,14 +81,7 @@ export default function PostForm({
         <label className="block text-sm font-medium" htmlFor="content">
           Content
         </label>
-        <textarea
-          id="content"
-          value={content}
-          onChange={(e) => setContent(e.target.value)}
-          rows={8}
-          required
-          className="form-input bg-base-300 w-full border-gray-700"
-        />
+        <TipTapEditor content={content} onChange={setContent} />
       </div>
 
       {/* Tags */}

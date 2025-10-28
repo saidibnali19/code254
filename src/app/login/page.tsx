@@ -9,7 +9,7 @@ export default function LoginPage() {
 
   const searchParams = useSearchParams();
 
-  const redirect = searchParams.get("redirect") || "/";
+  const redirect = searchParams.get("redirect") || "/dashboard";
 
   const router = useRouter();
   const [email, setEmail] = useState("");
