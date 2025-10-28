@@ -4,6 +4,7 @@ import { PostData } from "@/types/types";
 
 import ReadMoreButton from "./ReadMoreButton";
 import UserAvatar from "./UserAvatar";
+import { getExcerptFromHTML } from "@/utils/getExcerpt";
 
 interface PostProps extends PostData {
   variant?: "primary" | "secondary";
@@ -20,7 +21,7 @@ export default function Post({
   variant = "primary",
   buttonVariant = "no-icon",
 }: PostProps) {
-  const firsrtFewWords = content.split(" ").slice(0, 12).join(" ");
+  const excerpt = getExcerptFromHTML(content, 10);
 
   // Safely get the author name (whether populated or not)
   const authorName =
@@ -53,10 +54,7 @@ export default function Post({
           ))}
       </div>
       <h2 className="text-2xl leading-tight font-bold">{title}</h2>
-      <p className="leading-relaxed">
-        {firsrtFewWords}
-        {content.split(" ").length > 6 ? "..." : ""}
-      </p>
+      <p className="leading-relaxed">{excerpt}</p>
       <div className="@container grid border-t border-gray-200 pt-4">
         <div className="grid gap-x-4 gap-y-2 @xs:grid-cols-2">
           <div className="flex gap-2">
